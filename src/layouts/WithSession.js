@@ -27,7 +27,10 @@ const WithSession = ({ requireSession, ...rest }) => {
 
     return <SessionProvider value={session}>{rest.children}</SessionProvider>;
   } else {
-    return <ProgressLoaders></ProgressLoaders>;
+    if (requireSession) {
+      return <ProgressLoaders></ProgressLoaders>;
+    }
+    return <SessionProvider value={null}>{rest.children}</SessionProvider>;
   }
 };
 
